@@ -62,6 +62,21 @@ router.put('/:id', async (req, res) => {
   } catch (err) {sendUserError(500, 'Error updating project!')}
 });
 
+// find the specific actions of a specific project
+
+router.get('/actions/:projectId', (req, res) => {
+  const { projectId } = req.params;
+  projDb.getProjectActions(projectId)
+  .then(projectAction => {
+    if(projectAction === 0) {
+      return sendUserError(404, 'Project has no Actions', res);
+    }
+    res.json(projectAction)
+  })
+  .catch(err => {
+    return sendUserError(500, 'Database Failure', err)
+  })
+});
 
 
 module.exports = router;
