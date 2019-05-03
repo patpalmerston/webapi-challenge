@@ -3,11 +3,13 @@ const projDb = require('../helpers/projectModel');
 
 const router = express.Router();
 
+// custom error middleware
 const sendUserError = (status, message, res) => {
   res.status(status).json({ errorMessage: message });
   return;
 };
 
+// get all projects
 router.get('/', async (req, res) => {
   try {
     const projects = await projDb.get();
@@ -15,6 +17,7 @@ router.get('/', async (req, res) => {
   } catch (err) {sendUserError(500, 'Poject with that ID does not exist', err)}
 });
 
+// get a project by specific id
 router.get('/:id', async (req, res) => {
   try {
     const project = await projDb.get(req.params.id);
@@ -27,11 +30,24 @@ router.get('/:id', async (req, res) => {
   } catch (err) {sendUserError(500, 'The post info could not be retrieved.', err)}
 });
 
+// post a new project
 router.post('/', async (req, res) => {
   try {
     const newProject =  await projDb.insert(req.body);
     res.status(201).json(newProject);
   } catch (err) {sendUserError(500, 'Error adding post', err)}
+});
+
+// delete project
+router.delete('/:id', async (req, res) => {
+  try {
+    const project = await projDb.remove(req.params.id);
+    if(project > 0) {
+      res.status(200).json({ message: 'the project has been deleted.' })
+    } else {
+      res.status(404).json({ message: 'the project with that id can not be found' })
+    }
+  } catch (err) {sendUserError(500, 'the project could not be removed', err)}
 });
 
 module.exports = router;
