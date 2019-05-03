@@ -50,4 +50,18 @@ router.delete('/:id', async (req, res) => {
   } catch (err) {sendUserError(500, 'the project could not be removed', err)}
 });
 
+// update project
+router.put('/:id', async (req, res) => {
+  try{
+    const project = await projDb.update(req.params.id, req.body);
+    if(project) {
+      res.status(200).json(project)
+    } else {
+      res.status(404).json({ message: 'the project could not be found' })
+    }
+  } catch (err) {sendUserError(500, 'Error updating project!')}
+});
+
+
+
 module.exports = router;

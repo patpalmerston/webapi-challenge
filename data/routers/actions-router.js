@@ -49,4 +49,16 @@ router.delete('/:id', async (req, res) => {
     }
   } catch (err) {sendUserError(500, 'the action could not be removed', err)}
 });
+
+// update action
+router.put('/:id', async (req, res) => {
+  try{
+    const action = await actionDb.update(req.params.id, req.body);
+    if(action) {
+      res.status(200).json(action)
+    } else {
+      res.status(404).json({ message: 'the project could not be found' })
+    }
+  } catch (err) {sendUserError(500, 'Error updating project!')}
+});
 module.exports = router;
