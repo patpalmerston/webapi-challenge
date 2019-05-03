@@ -25,6 +25,13 @@ router.get('/:id', async (req, res) => {
       res.status(404).json({ error: 'The project info could not be retrieved', err })
     }
   } catch (err) {sendUserError(500, 'The post info could not be retrieved.', err)}
-})
+});
+
+router.post('/', async (req, res) => {
+  try {
+    const newProject =  await projDb.insert(req.body);
+    res.status(201).json(newProject);
+  } catch (err) {sendUserError(500, 'Error adding post', err)}
+});
 
 module.exports = router;

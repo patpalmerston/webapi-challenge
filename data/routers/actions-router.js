@@ -27,4 +27,12 @@ router.get('/:id', async (req, res) => {
   } catch (err) {sendUserError(500, 'The post info could not be retrieved.', err)}
 });
 
+router.post('/', async (req, res) => {
+  try {
+    const newAction =  await actionDb.insert(req.body);
+    res.status(201).json(newAction);
+  } catch (err) {sendUserError(500, 'Error adding Action', err)}
+});
+
+
 module.exports = router;
