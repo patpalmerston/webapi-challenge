@@ -26,13 +26,25 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ] Mention two parts of Express that you learned about this week.
 
+I learned that Express is a framework that sits on top of Node.js, just like Redux sits on top of React. I learned about Middleware and Routing which are the two main parts of Express that stuck with me the most.
+
 - [ ] Describe Middleware?
+
+Middleware are functions that operate with the req and res homies and can either return the response or continue the order of operations as it pertains to needed functionality.
 
 - [ ] Describe a Resource?
 
+A Resource is any data given to Restful API's through CRUD functionality. An example of a resource would be the given data set that is accessed through a url path.
+
+
+
 - [ ] What can the API return to help clients know if a request was successful?
 
+API's can return codes on demand to identify the current resource and wether or not a request was executed successfully or not. This allows the developer to give Clients Codes that directly relate to any issues that might be conducted in the execution of the code.
+
 - [ ] How can we partition our application into sub-applications?
+
+Express Routers help us split applications into sub-applications, helping to separate concerns and making maintenance easier on developers. Express Routers have their own Routing and Middleware.
 
 ## Project Setup
 
